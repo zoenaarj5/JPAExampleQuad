@@ -11,8 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
-@Entity
+@Table @Entity
 public class Job {
 	@Id
 	@GeneratedValue
@@ -26,7 +27,7 @@ public class Job {
 	private LocalDate deadline;
 	
 	@ManyToOne
-	@JoinColumn(name="company_id")
+	@JoinColumn(name="company_id",insertable=false,updatable=false)
 	private Company company;
 
 	@OneToMany(cascade=CascadeType.ALL)

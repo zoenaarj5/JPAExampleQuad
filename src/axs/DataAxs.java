@@ -9,11 +9,14 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 public interface DataAxs<T,K> {
-	final EntityManagerFactory entityManagerFactory=Persistence.createEntityManagerFactory("jobzapp");
-	@PersistenceContext(unitName="JPAExampleQuad")
+	final String PERSISTENCE_UNIT_NAME="JPAExampleQuad";
+	final EntityManagerFactory entityManagerFactory=Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+	@PersistenceContext(unitName=PERSISTENCE_UNIT_NAME)
 	final EntityManager entityManager=entityManagerFactory.createEntityManager();
 	final EntityTransaction transaction=entityManager.getTransaction();
 	Set<T> fetchAll();
 	T fetch(K id);
 	boolean add(T t);
+	boolean update(T t);
+	boolean delete(K id);
 }

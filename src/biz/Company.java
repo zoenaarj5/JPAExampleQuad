@@ -3,7 +3,8 @@ package biz;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-@Entity
+import javax.persistence.Table;
+@Table @Entity
 public class Company {
 	@Id
 	@GeneratedValue

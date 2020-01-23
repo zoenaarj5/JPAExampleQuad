@@ -1,5 +1,6 @@
 package biz;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Set;
@@ -8,14 +9,18 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
+import com.google.common.hash.Hashing;
+
+@Table @Entity
 public class Person {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Transient
 	private int age;
@@ -23,8 +28,9 @@ public class Person {
 	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
-	@Column(name="user_name")
+	@Column(name="user_name",unique=true)
 	private String userName;
+	@Column(unique=true)
 	private String email;
 	private String password;
 	@Column(name="birth_date")
@@ -65,7 +71,7 @@ public class Person {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString();
 	}
 	public LocalDate getBirthDate() {
 		return birthDate;

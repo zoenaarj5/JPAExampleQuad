@@ -1,69 +1,109 @@
 package biz;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-@Entity
+import javax.persistence.Table;
+import javax.persistence.Transient;
+@Table @Entity
 public class Application {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
-	private LocalDate date;
 	@ManyToOne
-	@JoinColumn(name="applicant_id")
+	@JoinColumn(name="applicant_id",insertable=false,updatable=false)
 	private Person applicant;
+	@ManyToOne
+	@JoinColumn(name="job_id",insertable=false,updatable=false)
 	private Job job;
+	@Column(name="sending_date")
+	private LocalDateTime sendingDate;
 	@Column(name="receiving_date")
-	private LocalDate receivingDate;
+	private LocalDateTime receivingDate;
+	@Column(name="acceptance_date")
+	private LocalDateTime acceptanceDate;
 	@Column(name="signing_date")
-	private boolean acceptanceDate;
-	@Column(name="signing_date")
-	private boolean signingDate;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public LocalDate getDate() {
-		return date;
-	}
-	public void setDate(LocalDate date) {
-		this.date = date;
+	private LocalDateTime signingDate;
+	@Transient
+	private boolean sent,received,accepted,signed;
+	public LocalDateTime getAcceptanceDate() {
+		return acceptanceDate;
 	}
 	public Person getApplicant() {
 		return applicant;
 	}
-	public void setApplicant(Person applicant) {
-		this.applicant = applicant;
+	public long getId() {
+		return id;
 	}
 	public Job getJob() {
 		return job;
 	}
+	public LocalDateTime getReceivingDate() {
+		return receivingDate;
+	}
+	public LocalDateTime getSendingDate() {
+		return sendingDate;
+	}
+	public LocalDateTime getSigningDate() {
+		return signingDate;
+	}
+	public boolean isAccepted() {
+		return accepted;
+	}
+	public boolean isReceived() {
+		return received;
+	}
+	public boolean isSent() {
+		return sent;
+	}
+	public boolean isSigned() {
+		return signed;
+	}
+	public void setAcceptanceDate(LocalDateTime acceptanceDate) {
+		this.acceptanceDate = acceptanceDate;
+		this.accepted=acceptanceDate!=null;
+	}
+	public void setAccepted(boolean accepted) {
+		this.accepted = accepted;
+		this.acceptanceDate=accepted?LocalDateTime.now():null;
+	}
+	public void setApplicant(Person applicant) {
+		this.applicant = applicant;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public void setJob(Job job) {
 		this.job = job;
 	}
-	public LocalDate getReceivingDate() {
-		return receivingDate;
+	public void setReceived(boolean received) {
+		this.received = received;
+		this.receivingDate=received?LocalDateTime.now():null;
 	}
-	public void setReceivingDate(LocalDate receivingDate) {
+	public void setReceivingDate(LocalDateTime receivingDate) {
 		this.receivingDate = receivingDate;
+		this.received=receivingDate!=null;
 	}
-	public boolean isAcceptanceDate() {
-		return acceptanceDate;
+	public void setSendingDate(LocalDateTime sendingDate) {
+		this.sendingDate = sendingDate;
+		this.sent=sendingDate!=null;
 	}
-	public void setAcceptanceDate(boolean acceptanceDate) {
-		this.acceptanceDate = acceptanceDate;
+	public void setSent(boolean sent) {
+		this.sent = sent;
+		this.sendingDate=sent?LocalDateTime.now():null;
 	}
-	public boolean isSigningDate() {
-		return signingDate;
+	public void setSigned(boolean signed) {
+		this.signed = signed;
+		this.signingDate=signed?LocalDateTime.now():null;
 	}
-	public void setSigningDate(boolean signingDate) {
+	public void setSigningDate(LocalDateTime signingDate) {
 		this.signingDate = signingDate;
+		this.signed=signingDate!=null;
 	}
 }

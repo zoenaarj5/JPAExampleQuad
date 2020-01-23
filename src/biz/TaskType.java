@@ -3,8 +3,9 @@ package biz;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+@Table(name="task_type") @Entity
 public class TaskType {
 	@Id
 	@GeneratedValue

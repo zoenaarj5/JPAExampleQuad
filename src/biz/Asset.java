@@ -2,15 +2,18 @@ package biz;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
-@Entity
-@Inheritance
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+@Table @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Asset {
 	@Id
-	@GeneratedValue
-	private long id;
-	private String name;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	protected long id;
+	protected String name;
 	public long getId() {
 		return id;
 	}
@@ -29,5 +32,5 @@ public abstract class Asset {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	private String description;
+	protected String description;
 }

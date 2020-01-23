@@ -2,6 +2,7 @@ package axs;
 
 import java.util.Set;
 
+import biz.Application;
 import biz.Job;
 
 public class JobAxs implements DataAxs<Job,Long> {
@@ -21,7 +22,6 @@ public class JobAxs implements DataAxs<Job,Long> {
 			transaction.commit();
 			return true;
 		}catch(Exception e) {
-			transaction.rollback();
 			e.printStackTrace();
 			return false;
 		}
@@ -35,6 +35,30 @@ public class JobAxs implements DataAxs<Job,Long> {
 	public Set<Job> fetchAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public boolean delete(Long id) {
+		try {
+			transaction.begin();
+			entityManager.remove(entityManager.find(Job.class,id));
+			transaction.commit();
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	@Override
+	public boolean update(Job job) {
+		try {
+			transaction.begin();
+			entityManager.merge(job);
+			transaction.commit();
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
