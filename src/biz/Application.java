@@ -17,18 +17,18 @@ public class Application {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
 	@ManyToOne
-	@JoinColumn(name="applicant_id",insertable=false,updatable=false)
+	@JoinColumn(name="APPLICANT_ID",insertable=false,updatable=false)
 	private Person applicant;
 	@ManyToOne
-	@JoinColumn(name="job_id",insertable=false,updatable=false)
+	@JoinColumn(name="JOB_ID",insertable=false,updatable=false)
 	private Job job;
-	@Column(name="sending_date")
+	@Column(name="SENDING_DATE")
 	private LocalDateTime sendingDate;
-	@Column(name="receiving_date")
+	@Column(name="RECEIVING_DATE")
 	private LocalDateTime receivingDate;
-	@Column(name="acceptance_date")
+	@Column(name="ACCEPTANCE_DATE")
 	private LocalDateTime acceptanceDate;
-	@Column(name="signing_date")
+	@Column(name="SIGNING_DATE")
 	private LocalDateTime signingDate;
 	@Transient
 	private boolean sent,received,accepted,signed;

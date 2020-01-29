@@ -12,10 +12,10 @@ import javax.persistence.Table;
 @Table @Entity
 public class Experience extends Asset {
 	@ManyToOne
-	@JoinColumn(name="company_id",insertable=false,updatable=false)
+	@JoinColumn(name="COMPANY_ID",insertable=false,updatable=false)
 	private Company company;
 	@ManyToOne
-	@JoinColumn(name="person_id",insertable=false,updatable=false)
+	@JoinColumn(name="PERSON_ID",insertable=false,updatable=false)
 	private Person person;
 	@OneToMany(cascade=CascadeType.ALL)
 	private Set<Task> tasks;

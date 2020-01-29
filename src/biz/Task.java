@@ -13,7 +13,7 @@ public class Task {
 	@GeneratedValue
 	private long id;
 	@ManyToOne
-	@JoinColumn(name="task_type_id")
+	@JoinColumn(name="TASK_TYPE_ID")
 	private TaskType taskType;
 	private String name;
 	public long getId() {

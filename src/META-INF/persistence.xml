@@ -13,14 +13,14 @@
 		<class>biz.TaskType</class>
 		<class>axs.cnv.LocalDateAttributeConverter</class>
 		<properties>
-		<property name="javax.persistence.schema-generation.database.action" value="none"/>
 		
 		<!-- MySQL -->
  	        <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 	        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jobzdb"/>
 	        <property name="javax.persistence.jdbc.user" value="root"/>
 	        <property name="javax.persistence.jdbc.password" value=""/>
-		    <property name="eclipselink.logging.level" value="FINEST"/> 
+		    <property name="eclipselink.logging.level" value="FINEST"/>
+		    <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> 
  		<!-- End MySQL -->
 		<!-- SQL Server -->
 <!--             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>

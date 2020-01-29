@@ -9,6 +9,8 @@ import biz.Person;
 class PeopleAxsTester {
 	public static void main(String args[]) {
 		System.out.println(mergeTest()?"OK :-)":"KO :-(");
+		System.out.println(addTest()?"OK :-)":"KO :-(");
+		
 	}
 	public static boolean mergeTest() {
 		PeopleAxs pax=PeopleAxs.getUniqueInstance();

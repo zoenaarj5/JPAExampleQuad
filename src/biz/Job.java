@@ -21,13 +21,13 @@ public class Job {
 	private String name;
 	private String description;
 
-	@Column(name="opening_date")
+	@Column(name="OPENING_DATE")
 	private LocalDate openingDate;
 	
 	private LocalDate deadline;
 	
 	@ManyToOne
-	@JoinColumn(name="company_id",insertable=false,updatable=false)
+	@JoinColumn(name="COMPANY_ID",insertable=false,updatable=false)
 	private Company company;
 
 	@OneToMany(cascade=CascadeType.ALL)

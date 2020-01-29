@@ -1,16 +1,23 @@
 package axs;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-import biz.Application;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
-public class ApplicationAxs implements DataAxs<Application,Long> {
+import biz.Application;
+import mtc.ApplicationMatcher;
+
+public class ApplicationAxs implements DataAxs<Application,Long,ApplicationMatcher> {
 	private static ApplicationAxs uniqueInstance=new ApplicationAxs() ;
 private ApplicationAxs() {
 	super();
 }
 	@Override
-	public Set<Application> fetchAll() {
+	public List<Application> fetchAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -59,5 +66,21 @@ private ApplicationAxs() {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	@Override
+	public List<Application> fetchBy(Map<ApplicationMatcher, Object> criteria) {
+		final CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		final CriteriaQuery<Application> cq=builder.createQuery(Application.class);
+		final Root<Application> root=cq.from(Application.class);
+		criteria.entrySet().forEach((es)->{
+			ApplicationMatcher matcher=es.getKey();
+			Object value=es.getValue();
+//			cq.where(builder.equal(root.get("userName"), (String)value));
+			switch(matcher) {
+			
+			}
+		});
+		List<Application> rsList=entityManager.createQuery(cq).getResultList();
+		return rsList;
 	}
 }

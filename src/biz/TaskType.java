@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name="task_type") @Entity
+@Table(name="TASK_TYPE") @Entity
 public class TaskType {
 	@Id
 	@GeneratedValue
